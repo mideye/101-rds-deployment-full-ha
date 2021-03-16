@@ -21,7 +21,7 @@
             "metadata": {
                 "description": "What is the password for the admin on VMs and SQL Server?"
             }
-        },        
+        },
         "location": {
             "type": "string",
             "defaultValue": "[resourceGroup().location]",
@@ -55,8 +55,8 @@
             "defaultValue": 1,
             "metadata": {
                 "description": "How many Domain Controllers would you like to deploy?"
-            }            
-        },        
+            }
+        },
         "rdcbCount": {
             "type": "int",
             "defaultValue": 1,
@@ -69,21 +69,21 @@
             "defaultValue": 1,
             "metadata": {
                 "description": "How many RD Web Access/Gateways would you like to deploy?"
-            }            
+            }
         },
         "rdshCount": {
             "type": "int",
             "defaultValue": 1,
             "metadata": {
                 "description": "How many RD Session Hosts would you like to deploy?"
-            }            
+            }
         },
         "lsfsCount": {
             "type": "int",
             "defaultValue": 1,
             "metadata": {
                 "description": "How many License/File Servers would you like to deploy?"
-            }            
+            }
         },
         "vmSize": {
             "type": "string",
@@ -94,7 +94,7 @@
                 "Standard_A8_v2",
                 "Standard_D1_v2",
                 "Standard_D2_v2",
-                "Standard_D3_v2",                
+                "Standard_D3_v2",
                 "Standard_D2_v3",
                 "Standard_D4_v3",
                 "Standard_DS1_v2",
@@ -102,7 +102,7 @@
             ],
             "metadata": {
                 "description": "What is the VM size for all VMs?"
-            }            
+            }
         },
         "vmSpot": {
             "type": "bool",
@@ -120,39 +120,39 @@
             ],
             "metadata": {
                 "description": "What is the SKU for the storage to VM managed disks?"
-            }            
+            }
         },
         "adDomainName": {
             "type": "string",
             "defaultValue": "contoso.com",
             "metadata": {
                 "description": "What is the new forest/root Active Directory domain name?"
-            }            
+            }
         },
         "vNetPrefix": {
             "type": "string",
             "defaultValue": "10.100",
             "metadata": {
                 "description": "What is the prefix for the vnet and first subnet?"
-            }            
+            }
         },
         "vNetAddressSpace": {
             "type": "string",
             "defaultValue": "[concat(parameters('vNetPrefix'),'.0.0/16')]",
             "metadata": {
                 "description": "What is the vnet address space?"
-            }            
+            }
         },
         "vNetSubnetAddress": {
             "type": "string",
             "defaultValue": "[concat(parameters('vNetPrefix'),'.0.0/24')]",
             "metadata": {
                 "description": "What is the subnet address prefix?"
-            }            
-        },       
+            }
+        },
         "_artifactsLocation": {
             "type": "string",
-            "defaultValue": "https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/101-rds-deployment-full-ha/",
+            "defaultValue": "https://raw.githubusercontent.com/mideye/101-rds-deployment-full-ha/master/",
             "metadata": {
                 "description": "Location of all scripts and DSC resources for RDS deployment."
             }
@@ -185,7 +185,7 @@
                 "intLbBackEndPool": "",
                 "pubLbBackEndPool": "",
                 "dscFunction": "DeployRDSLab.ps1\\CreateRootDomain"
-            },                
+            },
             {
                 "name": "[variables('vmNames')[1]]",
                 "count": "[parameters('rdwgCount')]",
@@ -213,7 +213,7 @@
                 "intLbBackEndPool": "",
                 "pubLbBackEndPool": "",
                 "dscFunction": "DeployRDSLab.ps1\\RDLicenseServer"
-            }                               
+            }
         ],
         "diagStorageName": "[concat(toLower(parameters('projectName')),variables('uniqueName'),'diag')]",
         "publicLbIpName": "[concat(toLower(parameters('projectName')),'lbpip')]",
@@ -269,7 +269,7 @@
                             "destinationPortRange": "80",
                             "protocol": "Tcp",
                             "direction": "Inbound",
-                            "priority": 1001                            
+                            "priority": 1001
                         }
                     },
                     {
@@ -282,7 +282,7 @@
                             "destinationPortRange": "443",
                             "protocol": "Tcp",
                             "direction": "Inbound",
-                            "priority": 1002                        
+                            "priority": 1002
                         }
                     },
                     {
@@ -295,9 +295,9 @@
                             "destinationPortRange": "3391",
                             "protocol": "Udp",
                             "direction": "Inbound",
-                            "priority": 1003                        
+                            "priority": 1003
                         }
-                    }                                     
+                    }
                 ]
             }
         },
@@ -372,7 +372,7 @@
                     {
                         "name": "rds-webgateways-int-pool",
                         "properties": {
-                        }                
+                        }
                     }
                 ],
                 "probes": [
@@ -431,7 +431,7 @@
                             "backendPort": 3389,
                             "idleTimeoutInMinutes": 4
                         }
-                    },                    
+                    },
                     {
                         "name": "rds-webgateway-http-rule",
                         "properties": {
@@ -448,7 +448,7 @@
                             "frontendPort": 80,
                             "backendPort": 80,
                             "idleTimeoutInMinutes": 4
-                        }                      
+                        }
                     },
                     {
                         "name": "rds-webgateway-https-rule",
@@ -466,7 +466,7 @@
                             "frontendPort": 443,
                             "backendPort": 443,
                             "idleTimeoutInMinutes": 4
-                        }                      
+                        }
                     },
                     {
                         "name": "rds-webgateway-udp-rule",
@@ -484,8 +484,8 @@
                             "frontendPort": 3391,
                             "backendPort": 3391,
                             "idleTimeoutInMinutes": 4
-                        }                      
-                    }                                      
+                        }
+                    }
                 ]
             }
         },
@@ -542,7 +542,7 @@
                             "numberOfProbes": 2
                         }
                     }
-                ],                
+                ],
                 "loadBalancingRules": [
                     {
                         "name": "rds-webgateways-http-rule",
@@ -560,7 +560,7 @@
                             "frontendPort": 80,
                             "backendPort": 80,
                             "enableFloatingIP": false,
-                            "idleTimeoutInMinutes": 5                            
+                            "idleTimeoutInMinutes": 5
                         }
                     },
                     {
@@ -579,7 +579,7 @@
                             "frontendPort": 443,
                             "backendPort": 443,
                             "enableFloatingIP": false,
-                            "idleTimeoutInMinutes": 5                            
+                            "idleTimeoutInMinutes": 5
                         }
                     },
                     {
@@ -598,9 +598,9 @@
                             "frontendPort": 3391,
                             "backendPort": 3391,
                             "enableFloatingIP": false,
-                            "idleTimeoutInMinutes": 5                            
+                            "idleTimeoutInMinutes": 5
                         }
-                    }                                        
+                    }
                 ]
             }
         },
@@ -651,7 +651,7 @@
             "copy": {
                 "name": "vmCopy",
                 "count": "[length(variables('vmProperties'))]"
-            },            
+            },
             "dependsOn": [
                 "[resourceId('Microsoft.Network/virtualNetworks',concat(parameters('projectName'),'vnet'))]",
                 "[resourceId('Microsoft.Network/loadBalancers',concat(parameters('projectName'),'intlb'))]",
@@ -712,7 +712,7 @@
                     },
                     "intLbWebGWIP": {
                         "value": "[reference(resourceId('Microsoft.Network/loadBalancers',concat(parameters('projectName'),'intlb'))).frontendIPConfigurations[1].properties.privateIPAddress]"
-                    },                    
+                    },
                     "pubLbName": {
                         "value": "[concat(parameters('projectName'),'publb')]"
                     },
@@ -727,7 +727,7 @@
                     },
                     "dcName": {
                         "value": "[variables('vmProperties')[0].name]"
-                    },                   
+                    },
                     "MainConnectionBroker": {
                         "value": "[concat(variables('vmProperties')[2].name,'1')]"
                     },
@@ -742,7 +742,7 @@
                     },
                     "SessionHostCount": {
                         "value": "[variables('vmProperties')[3].count]"
-                    },                    
+                    },
                     "LicenseServerName": {
                         "value": "[variables('vmProperties')[4].name]"
                     },
@@ -757,7 +757,7 @@
                     },
                     "externalDnsZone": {
                         "value": "[parameters('externalDnsZone')]"
-                    },                    
+                    },
                     "dscFunction": {
                         "value": "[variables('vmProperties')[copyIndex()].dscFunction]"
                     },
@@ -882,7 +882,7 @@
                         },
                         "externalDnsZone": {
                             "type": "string"
-                        },                                                                                                                                                                  
+                        },
                         "dscFunction": {
                             "type": "string"
                         },
@@ -897,7 +897,7 @@
                         },
                         "deployHA": {
                             "type": "bool"
-                        },                      
+                        },
                         "rdsDBName": {
                             "type": "string"
                         },
@@ -924,7 +924,7 @@
                             },
                             {
                                 "id": "[resourceId('Microsoft.Network/loadBalancers/backendAddressPools',parameters('pubLbName'),parameters('pubLbBackEndPool'))]"
-                            }                            
+                            }
                         ],
                         "intlbRef": "[resourceId(parameters('location'),'Microsoft.Network/loadBalancers',parameters('intLbName'))]"
                     },
@@ -940,7 +940,7 @@
                             "copy": {
                                 "name": "[concat(parameters('vmName'),'pipcopy')]",
                                 "count": "[parameters('loopCount')]"
-                            },                            
+                            },
                             "properties": {
                                 "publicIPAllocationMethod": "Static",
                                 "dnsSettings": {
@@ -956,10 +956,10 @@
                             "copy": {
                                 "name": "[concat(parameters('vmName'),'niccopy')]",
                                 "count": "[parameters('loopCount')]"
-                            },                            
+                            },
                             "dependsOn": [
                                 "[resourceId('Microsoft.Network/publicIPAddresses',concat(parameters('vmName'),copyIndex(1),'pip'))]"
-                            ],                          
+                            ],
                             "properties": {
                                 "ipConfigurations": [
                                     {
@@ -977,17 +977,17 @@
                                         }
                                     }
                                 ]
-                            }                                                        
+                            }
                         },
                         {
                             "type": "Microsoft.Compute/virtualMachines",
                             "apiVersion": "2019-07-01",
-                            "name": "[concat(parameters('vmName'),copyIndex(1))]",                             
+                            "name": "[concat(parameters('vmName'),copyIndex(1))]",
                             "location": "[parameters('location')]",
                             "copy": {
                                 "name": "[concat(parameters('vmName'),'vmcopy')]",
-                                "count": "[parameters('loopCount')]"                                
-                            },                          
+                                "count": "[parameters('loopCount')]"
+                            },
                             "dependsOn": [
                                 "[resourceId('Microsoft.Network/networkInterfaces',concat(parameters('vmName'),copyIndex(1),'nic1'))]"
                             ],
@@ -1067,7 +1067,7 @@
                                                         "SessionHost": "[concat(parameters('SessionHostName'),'1')]",
                                                         "LicenseServer": "[concat(parameters('LicenseServerName'),'1')]",
                                                         "externalFqdn": "[parameters('externalFqdn')]",
-                                                        "externalDnsDomain": "[parameters('externalDnsZone')]",                                                        
+                                                        "externalDnsDomain": "[parameters('externalDnsZone')]",
                                                         "IntBrokerLBIP": "[parameters('intLbBrokerIP')]",
                                                         "IntWebGWLBIP": "[parameters('intLbWebGWIP')]",
                                                         "WebGWDNS": "[parameters('webGwName')]"
@@ -1079,7 +1079,7 @@
                                             "Items": {
                                                 "AdminPassword": "[parameters('adminPasswd')]"
                                             }
-                                        }                                                                  
+                                        }
                                     }
                                 },
                                 {
@@ -1106,12 +1106,12 @@
                                             "commandToExecute": "[concat('powershell -ExecutionPolicy Bypass -File ./',parameters('scriptName'),' -AdminUser ',parameters('adminUser'),' -Passwd ',parameters('adminPasswd'),' -MainConnectionBroker ',parameters('MainConnectionBroker'),' -BrokerFqdn ',parameters('brokerFqdn'),' -WebGatewayFqdn ',parameters('externalFqdn'),' -AzureSQLFQDN ',parameters('azureSqlFqdn'),' -AzureSQLDBName ',parameters('rdsDBName'),' -WebAccessServerName ',parameters('WebAccessServerName'),' -WebAccessServerCount ',parameters('WebAccessServerCount'),' -SessionHostName ',parameters('SessionHostName'),' -SessionHostCount ',parameters('SessionHostCount'),' -LicenseServerName ',parameters('LicenseServerName'),' -LicenseServerCount ',parameters('LicenseServerCount'))]"
                                         }
                                     }
-                                }                                
-                            ]              
+                                }
+                            ]
                         }
                     ]
                 }
-            }           
+            }
         }
     ],
     "outputs": {
@@ -1127,6 +1127,6 @@
             "type": "string",
             "value": "[variables('externalFqdn')]",
             "condition": "[parameters('deployHA')]"
-        }        
+        }
     }
 }
